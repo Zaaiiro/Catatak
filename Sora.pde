@@ -1,0 +1,136 @@
+class Sora
+{
+  int l;
+  
+  Sora()
+  {
+    this.l = 5;
+  }
+  
+  void display()
+  {
+    noStroke();
+    //gris oscuro
+    fill(98);
+    rect(l*6,l*3,l*4,l*3);
+    rect(l*5,l*6,l*3,l*22);
+    rect(l*3,l*16,l*2,l*11);
+    rect(l*2,l*20,l,l*7);
+    rect(l*8,l*9,l*2,l*22);
+    rect(l*10,l*7,l*3,l*27);
+    rect(l*7,l*28,l,l);
+    rect(l*13,l*9,l,l*25);
+    rect(l*14,l*6,l*3,l*26);
+    rect(l*17,l*8,l*4,l*25);
+    rect(l*21,l*10,l*2,l*19);
+    rect(l*23,l*12,l*2,l*16);
+    rect(l*25,l*15,l*2,l*16);
+    rect(l*27,l*18,l*2,l*16);
+    rect(l*29,l*21,l*2,l*9);
+    //parte gris claro
+    fill(179);
+    rect(l*8,l*2,l*3,l);
+    rect(l*9,l*3,l*2,l);
+    rect(l*2,l*27,l*2,l);
+    rect(l*24,l*27,l,l);
+    rect(l*23,l*28,l*3,l);
+    rect(l*21,l*29,l*6,l);
+    rect(l*19,l*30,l*9,l);
+    rect(l*17,l*31,l*11,l);
+    rect(l*16,l*32,l*11,l);
+    rect(l*12,l*34,l*2,l);
+    rect(l*26,l*34,l*2,l);
+    //parte negra
+    fill(0);
+    rect(l*8,l,l*3,l);
+    rect(l*7,l*2,l,l);
+    rect(l*11,l*2,l,l*2);
+    rect(l*6,l*3,l,l);
+    rect(l*5,l*4,l,l*2);
+    rect(l*10,l*4,l,l);
+    rect(l*9,l*5,l,l);
+    rect(l*15,l*5,l,l);
+    rect(l*4,l*6,l,l*6);
+    rect(l*8,l*6,l,l);
+    rect(l*11,l*6,l,l);
+    rect(l*14,l*6,l,l*2);
+    rect(l*16,l*6,l,l);
+    rect(l*7,l*7,l,l);
+    rect(l*10,l*7,l,l);
+    rect(l*12,l*7,l,l);
+    rect(l*17,l*7,l,l);
+    rect(l*19,l*7,l,l);
+    rect(l*20,l*8,l,l);
+    rect(l*8,l*8,l*2,l);
+    rect(l*13,l*8,l,l);
+    rect(l*18,l*8,l,l);
+    rect(l*21,l*9,l,l);
+    rect(l*8,l*9,l,l);
+    rect(l*22,l*10,l,l);
+    rect(l*7,l*10,l,l);
+    rect(l*23,l*11,l,l);
+    rect(l*6,l*11,l,l);
+    rect(l*24,l*12,l,l);
+    rect(l*5,l*12,l,l*2);
+    rect(l*25,l*13,l,l*2);
+    rect(l*4,l*14,l,l*2);
+    rect(l*26,l*15,l,l*2);
+    rect(l*3,l*16,l,l*2);
+    rect(l*27,l*17,l,l);
+    rect(l*2,l*18,l,l*2);
+    rect(l*26,l*18,l,l);
+    rect(l*28,l*18,l,l);
+    rect(l*29,l*19,l,l*2);
+    rect(l*25,l*19,l,l*2);
+    rect(l*15,l*19,l,l);
+    rect(l*14,l*20,l,l);
+    rect(l*16,l*20,l,l);
+    rect(l,l*20,l,l*8);
+    rect(l*13,l*21,l,l*4);
+    rect(l*17,l*21,l,l);
+    rect(l*30,l*21,l,l*2);
+    rect(l*4,l*22,l,l*4);
+    rect(l*31,l*23,l,l*5);
+    rect(l*18,l*25,l*2,l);
+    rect(l*29,l*25,l*2,l);
+    rect(l*5,l*26,l,l);
+    rect(l*19,l*26,l*2,l);
+    rect(l*28,l*26,l*2,l);
+    rect(l*4,l*27,l*2,l);
+    rect(l*2,l*28,l*2,l);
+    rect(l*6,l*28,l,l);
+    rect(l*30,l*28,l,l*2);
+    rect(l*7,l*29,l,l);
+    rect(l*13,l*29,l,l*2);
+    rect(l*8,l*30,l,l);
+    rect(l*29,l*30,l,l*4);
+    rect(l*9,l*31,l,l);
+    rect(l*14,l*31,l,l*4);
+    rect(l*28,l*31,l,l);
+    rect(l*10,l*32,l,l*2);
+    rect(l*15,l*32,l,l);
+    rect(l*27,l*32,l,l);
+    rect(l*16,l*33,l*11,l);
+    rect(l*11,l*34,l,l);
+    rect(l*25,l*34,l,l);
+    rect(l*28,l*34,l,l);
+    rect(l*12,l*35,l*2,l);
+    rect(l*26,l*35,l*2,l);
+    //ojos
+    rect(l*20,l*27,l*2,l*2);
+    rect(l*27,l*27,l*2,l*2);
+    //nariz
+    rect(l*24,l*29,l,l);
+    rect(l*23,l*30,l,l);
+    rect(l*25,l*30,l,l);
+    //parte rosa
+    fill(206,116,126);
+    rect(l*27,l*19,l,l*2);
+    rect(l*15,l*21,l,l*2);
+    rect(l*24,l*30,l,l*2);
+    //brillo de ojos
+    fill(97,124,140);
+    rect(l*20,l*27,l,l);
+    rect(l*27,l*27,l,l);
+  }
+}
