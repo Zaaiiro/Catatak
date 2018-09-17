@@ -1,0 +1,611 @@
+int ctrl=1;
+int avatar, avatar2;
+int x, y;
+int crit1=0;
+int crit2=0;
+int PH1=100;
+int PH2=100;
+int turno=0;
+int damage1;
+int damage2;
+int winner;
+Titulo GameName;
+Seleccion seleccion;
+Escenario Combate;
+Nissi Pj1; 
+Chrona Pj2;
+Sora Pj3;
+Cheto Pj4;
+Brownie Pj5;
+Mapache Pj6;
+BarraPH barraPH;
+youwin YOUWIN;
+
+void Pantallas (int ctrl_)
+{
+  x=5;
+  y=5;
+  
+  switch(ctrl_)
+  {
+    case 1:
+        pushMatrix();
+        translate(x*21,y*14);
+        GameName.display();
+        popMatrix();
+        fill(0);
+        textSize(15);
+        text("Presiona ENTER para jugar",width/2,y*70);
+        text("Presiona ESC para salir",width/2,y*75);
+        menu();
+        break;
+    case 2:
+        background(133,151,166);
+        fill(124,117,117);
+        rectMode(CENTER);
+        rect(width/2,height/2,width,400);
+        rectMode(CORNER);
+        fill(133,151,166);
+        textSize(20);
+        text("JUGADOR", x*10,y*20);
+        textSize(25);
+        fill(200);
+        text("1",x*30,y*20);
+        fill(0);
+        textSize(15);
+        text("Elige a tu personaje:",x*10,y*25);
+        seleccion.display();
+        fill(255,220,161);
+        textSize(15);
+        text("1",x*15,y*39);
+        text("2",x*42,y*39);
+        text("3",x*66,y*39);
+        text("4",x*88,y*39);
+        text("5",x*115,y*39);
+        text("6",x*139,y*39);
+        fill(0);
+        text("Nissi",x*15,y*63);
+        text("Chrona",x*38,y*63);
+        text("Sora",x*64,y*63);
+        text("Cheto",x*85,y*63);
+        text("Brownie",x*111,y*63);
+        text("Mapache",x*133,y*63);
+        SelectPlayer1();
+        break;
+    case 3:
+        background(133,151,166);
+        fill(124,117,117);
+        rectMode(CENTER);
+        rect(width/2,height/2,width,400);
+        rectMode(CORNER);
+        fill(133,151,166);
+        textSize(20);
+        text("JUGADOR", x*10,y*20);
+        textSize(25);
+        fill(200);
+        text("2",x*30,y*20);
+        fill(0);
+        textSize(15);
+        text("Elige a tu personaje:",x*10,y*25);
+        seleccion.display();
+        fill(255,220,161);
+        textSize(15);
+        text("q",x*15,y*39);
+        text("w",x*42,y*39);
+        text("e",x*66,y*39);
+        text("r",x*88,y*39);
+        text("t",x*115,y*39);
+        text("y",x*139,y*39);
+        fill(0);
+        text("Nissi",x*15,y*63);
+        text("Chrona",x*38,y*63);
+        text("Sora",x*64,y*63);
+        text("Cheto",x*85,y*63);
+        text("Brownie",x*111,y*63);
+        text("Mapache",x*133,y*63);
+        SelectPlayer2();
+        break;
+    case 4:
+        seleccion.instrucciones();
+        if(turno == 0)
+        {
+          fill(195,115,115);
+          textSize(20);
+          text("Inicia Jugador1", x*125,x*82);
+        } else
+        {
+          fill(195,115,115);
+          textSize(20);
+          text("Inicia Jugador2", x*125,x*82);
+        }
+        if(keyPressed)
+        {
+          if(key == ENTER)
+          {
+            ctrl=5;
+          }
+        }
+        break;
+    case 5:
+        Combate.cielo();
+        Combate.display();
+        barraPH.gris();
+        barraPH.verde1();
+        barraPH.verde2();
+        barraPH.criticos1();
+        barraPH.criticos2();
+        fill(82,77,77);
+        rectMode(CENTER);
+        rect(width/2,x*3,x*10,y*7);
+        rectMode(CORNER);
+        textSize(20);
+        fill(195,115,115);
+        text("VS",x*78,y*5);
+        textSize(15);
+        fill(200);
+        text("Jugador1", x*10,y*8);
+        text("Jugador2", x*95,x*8);
+        PJ1();       
+        PJ2();
+        combate();
+        break;
+    case 6:
+        Combate.cielo();
+        fill(82,77,77);
+        rectMode(CENTER);
+        rect(width/2,x*3,x*10,y*7);
+        rectMode(CORNER);
+        textSize(20);
+        fill(195,115,115);
+        text("VS",x*78,y*5);
+        Combate.display();
+        barraPH.gris();
+        switch(winner)
+        {
+          case 0:
+            barraPH.verde1();
+            barraPH.criticos1();
+            barraPH.criticos2();
+            pushMatrix();
+            translate(x*90,x*20);
+            YOUWIN.display();
+            popMatrix();
+            break;
+          case 1:
+            barraPH.verde2();
+            barraPH.criticos1();
+            barraPH.criticos2();
+            pushMatrix();
+            translate(x*16,x*20);
+            YOUWIN.display();
+            popMatrix();
+            break;
+        }
+        textSize(15);
+        fill(200);
+        text("Jugador1", x*10,y*8);
+        text("Jugador2", x*95,x*8);
+        switch (winner)
+        {
+          case 0:
+            PJ1();
+            break;
+          case 1:
+            PJ2();
+            break;
+        }
+        if(keyPressed)
+        {
+          switch (key)
+          {
+            case 'c':
+                PH1=100;
+                PH2=100;
+                crit1=0;
+                crit2=0;
+                winner=2;
+                turno=1;
+                ctrl=2;
+                break;
+            case 'v':
+                PH1=100;
+                PH2=100;
+                crit1=0;
+                crit2=0;
+                winner=2;
+                turno=0;
+                ctrl=5;
+                break;
+          }
+        }        
+        break;
+   }
+}
+
+void menu()
+{
+ switch (key)
+ {
+   case ENTER:
+       ctrl=2;
+       break;
+   case ESC:
+       exit();
+ }
+}
+
+void SelectPlayer1()
+{
+  switch(key)
+  {
+    case '1':
+      avatar=1;
+      ctrl=3;
+      break;
+    case '2':
+      avatar=2;
+      ctrl=3;
+      break;
+    case '3':
+      avatar=3;
+      ctrl=3;
+      break;
+    case '4':
+      avatar=4;
+      ctrl=3;
+      break;
+    case '5':
+      avatar=5;
+      ctrl=3;
+      break;
+    case '6':
+      avatar=6;
+      ctrl=3;
+      break;
+  }  
+}
+
+void SelectPlayer2()
+{
+  switch(key)
+  {
+    case 'q':
+      avatar2=1;
+      ctrl=4;
+      break;
+    case 'w':
+      avatar2=2;
+      ctrl=4;
+      break;
+    case 'e':
+      avatar2=3;
+      ctrl=4;
+      break;
+    case 'r':
+      avatar2=4;
+      ctrl=4;
+      break;
+    case 't':
+      avatar2=5;
+      ctrl=4;
+      break;
+    case 'y':
+      avatar2=6;
+      ctrl=4;
+      break;
+  }
+}
+
+void combate()
+{
+  switch (turno)
+  { case 0:
+      switch(key)
+      {
+        case 'a':
+            PH2=PH2-damage1;
+            if(PH2<=0)
+            {
+              turno=3;
+              winner=0;
+            } 
+            else
+            {
+              turno++;
+            }
+            if(damage1>=8)
+            {
+              crit1++;
+            }
+            break;
+          
+        case 's':
+            if(crit1>=3)
+            {
+              PH2=PH2-damage2;
+              crit1=0;
+              if(PH2<=0)
+              {
+                turno=3;
+                winner=0;
+              } 
+              else
+              {
+                turno++;
+              }
+            }  
+            break;
+            
+        case 'd':
+            if(crit1>=2)
+            {
+              PH1=PH1+round((100-PH1)*0.3);
+              crit1=0;
+              turno++;
+            }
+            break;
+      }
+      break;
+      
+      
+    case 1:
+      switch(key)
+      {
+        case 'l':
+            PH1=PH1-damage1;
+            if(PH1<=0)
+            {
+              turno=3;
+              winner=1;
+            }
+            else
+            {
+              turno--;
+            }
+            if (damage1>=8)
+            {
+              crit2++;
+            }
+            break;
+        
+        case 'k':
+            if(crit2>=3)
+            {
+              PH1=PH1-damage2;
+              crit2=0;
+              if(PH1<=0)
+              {
+                turno=3;
+                winner=1;
+              }
+              else
+              {
+                turno--;
+              }
+            }
+            break;
+        case 'j':
+            if(crit2>=2)
+            {
+              PH2=PH2+round((100-PH2)*0.3);
+              crit2=0;
+              turno--;
+            }
+            break;
+      }
+      break;
+      
+    case 3:
+      switch (winner)
+      {
+        case 0:
+          ctrl=6;
+          break;
+          
+        case 1:
+          ctrl=6;
+          break;
+      }
+      break;
+  }
+}
+
+void PJ1()
+{
+  switch(avatar)
+  {
+    case 1: //NISSI
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*31,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*52,y*45);
+      scale(-1,1);
+      Pj1.display();
+      popMatrix();
+      break;
+    case 2: //CHRONA
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*31,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*46,y*45);
+      scale(-1,1);
+      Pj2.display();
+      popMatrix();
+      break;
+    case 3: //SORA
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*35,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*18,y*42);
+      Pj3.display();
+      popMatrix();
+      break;
+    case 4: //CHETO
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*34,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*48,y*42);
+      scale(-1,1);
+      Pj4.display();
+      popMatrix();
+      break;
+    case 5: //BROWNIE
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*34,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*18,y*42);
+      Pj5.display();
+      popMatrix();
+      break;
+    case 6: //MAPACHE
+      if(turno==0)
+      {
+        pushMatrix();
+        translate(x*35,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+      pushMatrix();
+      translate(x*18,y*42);
+      Pj6.display();
+      popMatrix();
+      break;
+  }
+}
+
+void PJ2()
+{
+ switch(avatar2)
+ {
+   case 1: //NISSI
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*126,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*107,y*45);
+     Pj1.display();
+     popMatrix();
+     break;
+   case 2://CHRONA
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*126,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*114,y*45);
+     Pj2.display();
+     popMatrix();
+     break;          
+   case 3://SORA
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*122,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*141,y*42);
+     scale(-1,1);
+     Pj3.display();
+     popMatrix();
+     break;
+   case 4://CHETO
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*123,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*111,y*42);
+     Pj4.display();
+     popMatrix();
+     break;          
+   case 5://BROWNIE
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*123,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*141,y*42);
+     scale(-1,1);
+     Pj5.display();
+     popMatrix();
+     break;
+   case 6://MAPACHE
+     if(turno==1)
+      {
+        pushMatrix();
+        translate(x*122,y*75);
+        Combate.indicadorTurno();
+        popMatrix();
+      }
+     pushMatrix();
+     translate(x*141,y*42);
+     scale(-1,1);
+     Pj6.display();
+     popMatrix();
+     break;
+ } 
+}
+
+void setup()
+{
+  size(800,465);
+  
+  GameName = new Titulo();
+  seleccion =new Seleccion();
+  Combate = new Escenario();
+  Pj1 = new Nissi();
+  Pj2 = new Chrona();
+  Pj3 = new Sora();
+  Pj4 = new Cheto();
+  Pj5 = new Brownie();
+  Pj6 = new Mapache();
+  barraPH = new BarraPH();
+  YOUWIN = new youwin();
+}
+
+void draw()
+{
+  damage1=round(random(5,10));
+  damage2=round(random(10,30));
+  Pantallas(ctrl);
+}
